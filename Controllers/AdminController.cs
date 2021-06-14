@@ -52,15 +52,14 @@ namespace LectureWebPrgBackend.Controllers
         [AdminAccessNeeded]
         [HttpPost]
         public ActionResult Products(AdminProductsModel model) {
-            System.Diagnostics.Debug.WriteLine("Products POST detected | is model valid: " + ModelState.IsValid);
             if(ModelState.IsValid) {
                 Product pro = new Product {
-                    Id = model.CreateUserModel.Id,
-                    CategoryId = model.CreateUserModel.CategoryId,
-                    Name = model.CreateUserModel.Name,
-                    Price = model.CreateUserModel.Price,
-                    ImageURL = model.CreateUserModel.ImageURL,
-                    Description = model.CreateUserModel.Description
+                    Id = model.CreateProductModel.Id,
+                    CategoryId = model.CreateProductModel.CategoryId,
+                    Name = model.CreateProductModel.Name,
+                    Price = model.CreateProductModel.Price,
+                    ImageURL = model.CreateProductModel.ImageURL,
+                    Description = model.CreateProductModel.Description
                 };
 
                 this._db.Products.Add(pro);
@@ -68,23 +67,77 @@ namespace LectureWebPrgBackend.Controllers
 
                 ViewBag.ActionResult = "Product " + pro.Id + " has been created.";
             }
-            return View(model);
+            return View(new AdminProductsModel {
+                ProductList = this._db.GetProductList(),
+                CreateProductModel = model.CreateProductModel
+            });
         }
 
         [AdminAccessNeeded]
-        [HttpDelete]
-        public ActionResult Products(string productID) {
+        [HttpPost]
+        public ActionResult DeleteProduct(string productID) {
+            string resultMessage = null;
+
             if(productID.Length > 0) {
                 Product found = this._db.Products.Find(productID);
                 if(found != null) {
                     this._db.Products.Remove(found);
                     this._db.SaveChanges();
-                    ViewBag.ActionResult = "Product " + productID + " has been deleted successfully.";
+                    resultMessage = "Product " + productID + " has been deleted successfully.";
                 }else {
-                    ViewBag.ActionResult = "Product " + productID + " could not be found.";
+                    resultMessage = "Product " + productID + " could not be found.";
                 }
             }
-            return View();
+
+            return RedirectToAction("Products", new { deletionResult = resultMessage });
+        }
+
+        // ---------------------
+
+        [AdminAccessNeeded]
+        public ActionResult ProductCategories() {
+            return View(new AdminProductCategoriesModel {
+                CategoryList = this._db.GetProductCategoryList()
+            });
+        }
+
+        [AdminAccessNeeded]
+        [HttpPost]
+        public ActionResult ProductCategories(AdminProductCategoriesModel model) {
+            if (ModelState.IsValid) {
+                ProductCategory pro = new ProductCategory {
+                    Id = model.CreateProductCategoryModel.Id,
+                    Name = model.CreateProductCategoryModel.Name
+                };
+
+                this._db.ProductCategories.Add(pro);
+                this._db.SaveChanges();
+
+                ViewBag.ActionResult = "Product category " + pro.Id + " has been created.";
+            }
+            return View(new AdminProductCategoriesModel {
+                CategoryList = this._db.GetProductCategoryList(),
+                CreateProductCategoryModel = model.CreateProductCategoryModel
+            });
+        }
+
+        [AdminAccessNeeded]
+        [HttpPost]
+        public ActionResult DeleteProductCategory(string categoryID) {
+            string resultMessage = null;
+
+            if (categoryID.Length > 0) {
+                ProductCategory found = this._db.ProductCategories.Find(categoryID);
+                if (found != null) {
+                    this._db.ProductCategories.Remove(found);
+                    this._db.SaveChanges();
+                    resultMessage = "Product category " + categoryID + " has been deleted successfully.";
+                } else {
+                    resultMessage = "Product category " + categoryID + " could not be found.";
+                }
+            }
+
+            return RedirectToAction("ProductCategories", new { deletionResult = resultMessage });
         }
 
     }

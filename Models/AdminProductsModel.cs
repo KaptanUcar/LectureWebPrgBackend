@@ -6,7 +6,7 @@ using System.Web;
 namespace LectureWebPrgBackend.Models {
     public class AdminProductsModel {
 
-        public AdminCreateUserModel CreateUserModel { get; set; }
+        public AdminCreateProductModel CreateProductModel { get; set; }
 
         public List<Product> ProductList { get; set; }
 

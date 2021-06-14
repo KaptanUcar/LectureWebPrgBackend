@@ -223,8 +223,10 @@
       <DependentUpon>202106131436480_ChangeLocationOfStockAmount.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Models\AdminCreateUserModel.cs" />
+    <Compile Include="Models\AdminCreateProductCategoryModel.cs" />
+    <Compile Include="Models\AdminCreateProductModel.cs" />
     <Compile Include="Models\AdminLoginModel.cs" />
+    <Compile Include="Models\AdminProductCategoriesModel.cs" />
     <Compile Include="Models\AdminProductsModel.cs" />
     <Compile Include="Models\Product.cs" />
     <Compile Include="Models\ProductCategory.cs" />
@@ -276,6 +278,7 @@
     <Content Include="Content\fontawesome-free\webfonts\fa-solid-900.ttf" />
     <Content Include="Content\fontawesome-free\webfonts\fa-solid-900.woff" />
     <Content Include="Content\fontawesome-free\webfonts\fa-solid-900.woff2" />
+    <Content Include="Views\Admin\ProductCategories.cshtml" />
     <None Include="Views\Admin\Products.cshtml" />
     <None Include="Views\Admin\Login.cshtml" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />

@@ -1,7 +1,7 @@
-﻿@model LectureWebPrgBackend.Models.AdminProductsModel
+﻿@model LectureWebPrgBackend.Models.AdminProductCategoriesModel
 @{
-    ViewBag.Title = "Products";
-    ViewBag.Action = "Products";
+    ViewBag.Title = "Product Categories";
+    ViewBag.Action = "ProductCategories";
 }
 
 <!-- Header -->
@@ -28,36 +28,20 @@
                         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="modalCreateProductLabel">Add New Product</h5>
+                                    <h5 class="modal-title" id="modalCreateProductLabel">Add New Product Category</h5>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
                                 </div>
                                 <div class="modal-body">
-                                    @using (Html.BeginForm("Products", "Admin", FormMethod.Post)) {
+                                    @using (Html.BeginForm("ProductCategories", "Admin", FormMethod.Post)) {
                                         <div class="form-group">
-                                            @Html.LabelFor(f => Model.CreateProductModel.Id)
-                                            @Html.TextBoxFor(f => Model.CreateProductModel.Id, new { type = "text", @class = "form-control", @Value = @ViewBag.createId })
+                                            @Html.LabelFor(f => Model.CreateProductCategoryModel.Id)
+                                            @Html.TextBoxFor(f => Model.CreateProductCategoryModel.Id, new { type = "text", @class = "form-control", @Value = @ViewBag.createId })
                                         </div>
                                         <div class="form-group">
-                                            @Html.LabelFor(f => Model.CreateProductModel.CategoryId)
-                                            @Html.TextBoxFor(f => Model.CreateProductModel.CategoryId, new { type = "text", @class = "form-control", @Value = @ViewBag.createCatId })
-                                        </div>
-                                        <div class="form-group">
-                                            @Html.LabelFor(f => Model.CreateProductModel.Name)
-                                            @Html.TextBoxFor(f => Model.CreateProductModel.Name, new { type = "text", @class = "form-control", @Value = @ViewBag.createName })
-                                        </div>
-                                        <div class="form-group">
-                                            @Html.LabelFor(f => Model.CreateProductModel.Price)
-                                            @Html.TextBoxFor(f => Model.CreateProductModel.Price, new { type = "number", @class = "form-control", @Value = @ViewBag.createPrice })
-                                        </div>
-                                        <div class="form-group">
-                                            @Html.LabelFor(f => Model.CreateProductModel.ImageURL)
-                                            @Html.TextBoxFor(f => Model.CreateProductModel.ImageURL, new { type = "text", @class = "form-control", @Value = @ViewBag.createImgUrl })
-                                        </div>
-                                        <div class="form-group">
-                                            @Html.LabelFor(f => Model.CreateProductModel.Description)
-                                            @Html.TextAreaFor(f => Model.CreateProductModel.Description, new { rows = "3", @class = "form-control", @Value = @ViewBag.createDesc })
+                                            @Html.LabelFor(f => Model.CreateProductCategoryModel.Name)
+                                            @Html.TextBoxFor(f => Model.CreateProductCategoryModel.Name, new { type = "text", @class = "form-control", @Value = @ViewBag.createName })
                                         </div>
                                         <button type="submit" class="btn btn-primary">Create</button>
                                     }
@@ -89,7 +73,7 @@
             <div class="card">
                 <!-- Card header -->
                 <div class="card-header border-0">
-                    <h3 class="mb-0">All Products</h3>
+                    <h3 class="mb-0">All Product Categories</h3>
                 </div>
                 <!-- Light table -->
                 <div class="table-responsive">
@@ -97,36 +81,22 @@
                         <thead class="thead-light">
                             <tr>
                                 <th scope="col" class="sort" data-sort="id">ID</th>
-                                <th scope="col" class="sort" data-sort="catId">Category ID</th>
                                 <th scope="col" class="sort" data-sort="name">Name</th>
-                                <th scope="col" class="sort" data-sort="price">Price</th>
-                                <th scope="col" class="sort" data-sort="imageUrl">Image URL</th>
-                                <th scope="col" class="sort" data-sort="desc">Description</th>
                                 <th scope="col"></th>
                             </tr>
                         </thead>
                         <tbody class="list">
-                            @foreach (LectureWebPrgBackend.Models.Product product in Model.ProductList) {
+                            @foreach (LectureWebPrgBackend.Models.ProductCategory category in Model.CategoryList) {
                             <tr>
-                                <th scope="row">@product.Id</th>
-                                <td class="budget">@product.CategoryId</td>
-                                <td>@product.Name</td>
-                                <td class="budget">@(product.Price + " ₺")</td>
-                                <td class="budget">
-                                    <img class="img-thumbnail" style="max-height: 80px;" src="@product.ImageURL" alt="@product.Name" />
-                                </td>
-                                <td>
-                                    <div style="width: 15rem; height: 8rem; overflow: auto;">
-                                        <p class="text-wrap">@product.Description</p>
-                                    </div>
-                                </td>
+                                <th scope="row">@category.Id</th>
+                                <td>@category.Name</td>
                                 <td class="text-right">
                                     <div class="dropdown">
                                         <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                             <i class="fas fa-ellipsis-v"></i>
                                         </a>
                                         <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                                            @using (Html.BeginForm("DeleteProduct", "Admin", new { productID = product.Id }, FormMethod.Post)) {
+                                            @using (Html.BeginForm("DeleteProductCategory", "Admin", new { categoryID = category.Id }, FormMethod.Post)) {
                                                 <button class="dropdown-item" type="submit">Delete</button>
                                             }
                                             <!-- <a class="dropdown-item" href="#">Delete</a> -->

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Web;
 
 namespace LectureWebPrgBackend.Models {
-    public class AdminCreateUserModel {
+    public class AdminCreateProductModel {
 
         [Required(ErrorMessage = "Please enter a valid id.")]
         [Display(Name = "ID")]

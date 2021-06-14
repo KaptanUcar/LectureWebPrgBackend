@@ -21,6 +21,10 @@ namespace LectureWebPrgBackend.Models {
 
         }
 
+        public List<ProductCategory> GetProductCategoryList() {
+            return this.ProductCategories.ToList();
+        }
+
         public List<Product> GetProductList() {
             return this.Products.ToList();
         }
