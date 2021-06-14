@@ -223,7 +223,9 @@
       <DependentUpon>202106131436480_ChangeLocationOfStockAmount.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\AdminCreateUserModel.cs" />
     <Compile Include="Models\AdminLoginModel.cs" />
+    <Compile Include="Models\AdminProductsModel.cs" />
     <Compile Include="Models\Product.cs" />
     <Compile Include="Models\ProductCategory.cs" />
     <Compile Include="Models\DBModelsContext.cs" />

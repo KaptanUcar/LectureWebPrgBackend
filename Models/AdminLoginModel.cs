@@ -13,6 +13,7 @@ namespace LectureWebPrgBackend.Models {
         public string Username { get; set; }
 
         [Required(ErrorMessage = "Please enter your password.")]
+        [DataType(DataType.Password)]
         [Display(Name = "Password")]
         public string Password { get; set; }
 
